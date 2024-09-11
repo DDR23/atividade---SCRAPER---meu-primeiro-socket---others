@@ -20,7 +20,7 @@ export default async function ControllerScraperInit(socket: Socket, data: TypeCo
     });
   } finally {
     try {
-      await CloseBrowser();
+      // await CloseBrowser();
     } catch (closeError) {
       console.error('Erro ao fechar o navegador:', closeError);
     }

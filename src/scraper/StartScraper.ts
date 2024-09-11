@@ -15,6 +15,8 @@ export async function StartScraper(config: TypeConfig): Promise<void> {
 
     await Login(page, CONFIG_USER, CONFIG_PASSWORD);
 
+    // await page.pause();
+
   } catch (error) {
     throw new Error('A página não foi inicializada: ' + (error as Error).message);
   }
