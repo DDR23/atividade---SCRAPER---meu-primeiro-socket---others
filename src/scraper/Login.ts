@@ -1,5 +1,5 @@
 
-import { Page } from 'playwright-firefox';
+import { Page } from 'playwright';
 import { GetRandomNumber } from './utils/GetRandomNumber';
 
 export async function Login(page: Page, usuario: string, senha: string): Promise<void> {

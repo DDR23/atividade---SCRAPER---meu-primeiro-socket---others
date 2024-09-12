@@ -1,7 +1,16 @@
-import { firefox, Browser, BrowserContext } from 'playwright-firefox';
+import { firefox, Browser, BrowserContext } from 'playwright';
 
 let browser: Browser | null = null;
 let context: BrowserContext | null = null;
+
+const userAgents = [
+  'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36',
+];
+
+function getRandomUserAgent(): string {
+  const randomIndex = Math.floor(Math.random() * userAgents.length);
+  return userAgents[randomIndex];
+}
 
 export async function OpenBrowser(): Promise<void> {
   if (!browser) {
@@ -11,7 +20,7 @@ export async function OpenBrowser(): Promise<void> {
       args: ["--no-sandbox", "--disable-setuid-sandbox"],
     });
     context = await browser.newContext({
-      userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36'
+      userAgent: getRandomUserAgent()
     });
   }
 }

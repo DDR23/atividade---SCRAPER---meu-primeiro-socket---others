@@ -13,7 +13,7 @@ export async function StartScraper(config: TypeConfig): Promise<void> {
     await page.goto('https://www.bet365.com/');
     await page.waitForTimeout(GetRandomNumber(5000, 8000));
 
-    await Login(page, CONFIG_USER, CONFIG_PASSWORD);
+    // await Login(page, CONFIG_USER, CONFIG_PASSWORD);
 
     // await page.pause();
 
