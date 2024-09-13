@@ -1,0 +1,303 @@
+[
+  {
+    "name_competition": "Copa TT",
+    "games": [
+      {
+        "time_one": {
+          "name": "Dominik Lafek",
+          "sets": 0,
+          "points": 2,
+          "odd": 9
+        },
+        "time_two": {
+          "name": "Jaroslav Dohnal",
+          "sets": 2,
+          "points": 4,
+          "odd": 1.04
+        }
+      },
+      {
+        "time_one": {
+          "name": "Frantisek Balcar",
+          "sets": 0,
+          "points": 0,
+          "odd": 1.61
+        },
+        "time_two": {
+          "name": "Zdenek Muhlhauser",
+          "sets": 0,
+          "points": 0,
+          "odd": 2.2
+        }
+      }
+    ]
+  },
+  {
+    "name_competition": "TT Star Series",
+    "games": [
+      {
+        "time_one": {
+          "name": "Thomas Keinath",
+          "sets": 1,
+          "points": 0,
+          "odd": 8
+        },
+        "time_two": {
+          "name": "Antonin Gavlas",
+          "sets": 2,
+          "points": 0,
+          "odd": 1.062
+        }
+      }
+    ]
+  },
+  {
+    "name_competition": "República Tcheca - Liga Pro",
+    "games": [
+      {
+        "time_one": {
+          "name": "Jiri Ruzicka",
+          "sets": 0,
+          "points": 2,
+          "odd": 2
+        },
+        "time_two": {
+          "name": "Tadeas Zika",
+          "sets": 0,
+          "points": 4,
+          "odd": 1.72
+        }
+      },
+      {
+        "time_one": {
+          "name": "Vratislav Petracek",
+          "sets": 2,
+          "points": 9,
+          "odd": 1.61
+        },
+        "time_two": {
+          "name": "Marcel Pikous",
+          "sets": 2,
+          "points": 9,
+          "odd": 2.2
+        }
+      },
+      {
+        "time_one": {
+          "name": "Martin Pavliska",
+          "sets": 0,
+          "points": 4,
+          "odd": 1.36
+        },
+        "time_two": {
+          "name": "Lubomir Navrat",
+          "sets": 0,
+          "points": 4,
+          "odd": 3
+        }
+      },
+      {
+        "time_one": {
+          "name": "Michal Vavrecka",
+          "sets": 0,
+          "points": 2,
+          "odd": 2.5
+        },
+        "time_two": {
+          "name": "Marek Sedlak Snr",
+          "sets": 0,
+          "points": 5,
+          "odd": 1.5
+        }
+      },
+      {
+        "time_one": {
+          "name": "Tomas Pelikan",
+          "sets": 0,
+          "points": 1,
+          "odd": 2.2
+        },
+        "time_two": {
+          "name": "Ludek Pelikan",
+          "sets": 0,
+          "points": 5,
+          "odd": 1.61
+        }
+      },
+      {
+        "time_one": {
+          "name": "Zbynek Pagac",
+          "sets": 0,
+          "points": 0,
+          "odd": 2
+        },
+        "time_two": {
+          "name": "Petr Saleny",
+          "sets": 0,
+          "points": 0,
+          "odd": 1.72
+        }
+      }
+    ]
+  },
+  {
+    "name_competition": "Copa Setka",
+    "games": [
+      {
+        "time_one": {
+          "name": "Petr Orlowski",
+          "sets": 2,
+          "points": 7,
+          "odd": 1.04
+        },
+        "time_two": {
+          "name": "David Sabuka",
+          "sets": 2,
+          "points": 1,
+          "odd": 9
+        }
+      },
+      {
+        "time_one": {
+          "name": "Stepan Rejent",
+          "sets": 2,
+          "points": 9,
+          "odd": 1.071
+        },
+        "time_two": {
+          "name": "Pavel Fencl",
+          "sets": 0,
+          "points": 9,
+          "odd": 7.5
+        }
+      },
+      {
+        "time_one": {
+          "name": "Yevhen Skorobahatyi",
+          "sets": 2,
+          "points": 5,
+          "odd": 1.071
+        },
+        "time_two": {
+          "name": "Mykhailo Sokur",
+          "sets": 0,
+          "points": 5,
+          "odd": 7.5
+        }
+      },
+      {
+        "time_one": {
+          "name": "Serhii Chelpanov",
+          "sets": 0,
+          "points": 9,
+          "odd": 1.8
+        },
+        "time_two": {
+          "name": "Yevhen Kryvorotko",
+          "sets": 1,
+          "points": 6,
+          "odd": 1.9
+        }
+      },
+      {
+        "time_one": {
+          "name": "Andrii Zeniuk",
+          "sets": 0,
+          "points": 0,
+          "odd": 3.5
+        },
+        "time_two": {
+          "name": "Oleh Bindas",
+          "sets": 0,
+          "points": 0,
+          "odd": 1.28
+        }
+      }
+    ]
+  },
+  {
+    "name_competition": "Copa Setka - Feminino",
+    "games": [
+      {
+        "time_one": {
+          "name": "Hanna Lapa",
+          "sets": 0,
+          "points": 0,
+          "odd": 2
+        },
+        "time_two": {
+          "name": "Anastasiia Hordynska-Sheiko",
+          "sets": 0,
+          "points": 0,
+          "odd": 1.72
+        }
+      }
+    ]
+  },
+  {
+    "name_competition": "TT Elite Series",
+    "games": [
+      {
+        "time_one": {
+          "name": "Mateusz Czernik",
+          "sets": 2,
+          "points": 1,
+          "odd": 1.25
+        },
+        "time_two": {
+          "name": "Marcin Marchlewski",
+          "sets": 1,
+          "points": 0,
+          "odd": 3.75
+        }
+      },
+      {
+        "time_one": {
+          "name": "Marek Kowol",
+          "sets": 0,
+          "points": 16,
+          "odd": 1.44
+        },
+        "time_two": {
+          "name": "Wojciech Iwasyszyn",
+          "sets": 0,
+          "points": 15,
+          "odd": 2.62
+        }
+      }
+    ]
+  },
+  {
+    "name_competition": "",
+    "games": [
+      {
+        "time_one": {
+          "name": "Adrien Rassenfosse",
+          "sets": 1,
+          "points": 3,
+          "odd": 1.8
+        },
+        "time_two": {
+          "name": "Jo Yokotani",
+          "sets": 1,
+          "points": 2,
+          "odd": 1.9
+        }
+      },
+      {
+        "time_one": {
+          "name": "Fanbo Meng",
+          "sets": 0,
+          "points": 0,
+          "odd": 2.62
+        },
+        "time_two": {
+          "name": "Anders Lind",
+          "sets": 0,
+          "points": 0,
+          "odd": 1.44
+        }
+      }
+    ]
+  }
+]

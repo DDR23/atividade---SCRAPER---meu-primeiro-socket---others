@@ -4,7 +4,8 @@ import { GetRandomNumber } from './utils/GetRandomNumber';
 
 export async function Login(page: Page, usuario: string, senha: string): Promise<void> {
   try {
-    await page.locator('.hm-MainHeaderRHSLoggedOutWide_Login').click({ delay: 400 });
+    // await page.locator('.hm-MainHeaderRHSLoggedOutWide_Login').click({ delay: 400 });
+    await page.locator('.hm-MainHeaderRHSLoggedOutNarrow_Login').click({ delay: 400 }); // mobile
     await page.waitForTimeout(GetRandomNumber(4000,7000));
     await page.fill('.lms-StandardLogin_Username', usuario);
     await page.waitForTimeout(GetRandomNumber(500, 2000));
