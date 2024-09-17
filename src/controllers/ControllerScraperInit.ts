@@ -19,23 +19,22 @@ export default async function ControllerScraperInit(socket: Socket, data: TypeCo
     });
 
     // Adicione um ouvinte para parar o scraper quando solicitado
-    socket.on('STOP_SCRAPER', async () => {
-      if (scraper) {
-        await scraper.stop(); // Interrompa o scraping
-        socket.emit('SCRAPER_STOP_RES', {
-          title: 'Parado',
-          message: 'O scraper foi parado com sucesso.',
-        });
-      } else {
-        socket.emit('SCRAPER_STOP_RES', {
-          title: 'Erro',
-          message: 'Nenhum scraper em execução.',
-        });
-      }
-    });
+    // socket.on('STOP_SCRAPER', async () => {
+    //   if (scraper) {
+    //     await scraper.stop(); // Interrompa o scraping
+    //     socket.emit('SCRAPER_STOP_RES', {
+    //       title: 'Parado',
+    //       message: 'O scraper foi parado com sucesso.',
+    //     });
+    //   } else {
+    //     socket.emit('SCRAPER_STOP_RES', {
+    //       title: 'Erro',
+    //       message: 'Nenhum scraper em execução.',
+    //     });
+    //   }
+    // });
 
   } catch (error) {
-    console.error('Erro ao iniciar o scraper:', error);
     socket.emit('SCRAPER_INIT_RES', {
       title: 'Erro',
       message: (error as Error).message || 'A ação não pode ser finalizada.',
