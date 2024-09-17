@@ -14,3 +14,8 @@ export interface TypeCompetition {
   name_competition: string;
   games: Game[];
 }
+
+export interface CompetitionData {
+  configId: string;
+  lista: TypeCompetition[];
+}
