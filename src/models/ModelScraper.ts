@@ -4,14 +4,14 @@ import { CreateListCompetitions } from "../scraper/CreateListCompetitions";
 
 export class Scraper {
   private page: Page;
-  private strategyId: string;
+  private configId: string;
   private interval: number;
   private intervalId: NodeJS.Timeout | null = null;
-  private competitionsData: { [strategyId: string]: CompetitionData } = {};
+  private competitionsData: { [configId: string]: CompetitionData } = {};
 
-  constructor(page: Page, strategyId: string, interval: number) {
+  constructor(page: Page, configId: string, interval: number) {
     this.page = page;
-    this.strategyId = strategyId;
+    this.configId = configId;
     this.interval = interval;
   }
 
@@ -31,8 +31,8 @@ export class Scraper {
   private async collectData() {
     try {
       const listCompetitions = await CreateListCompetitions(this.page);
-      this.competitionsData[this.strategyId] = {
-        configId: this.strategyId,
+      this.competitionsData[this.configId] = {
+        configId: this.configId,
         lista: listCompetitions
       };
     } catch (error) {
