@@ -18,7 +18,7 @@ export default async function ControllerScraperInit(socket: Socket, data: TypeCo
       message: 'A configuração foi processada com sucesso!',
     });
 
-    // Adicione um ouvinte para parar o scraper quando solicitado
+    // Adicione um ouvinte para parar o scraper quando solicitado ESSE PEDAÇO DEVE SER REALOCADO PARA O CONTROLLER RESPONSAVEL PELO STOPBOT
     // socket.on('STOP_SCRAPER', async () => {
     //   if (scraper) {
     //     await scraper.stop(); // Interrompa o scraping
