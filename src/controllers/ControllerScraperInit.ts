@@ -1,15 +1,37 @@
 import { Socket } from 'socket.io';
 import { TypeConfig } from '../types/TypeConfig';
+import { getStartAndFinishTimes, getTimeUntilStart, getTimeRemaining, msToSeconds, isWithinTime } from '../scraper/utils/VerifyTime';
 
 export default async function ControllerScraperInit(socket: Socket, data: TypeConfig) {
-  try {
-    const { CONFIG_TIME_START, CONFIG_TIME_FINISH } = data;
+  const { startTime, finishTime } = getStartAndFinishTimes(data.CONFIG_TIME_START, data.CONFIG_TIME_FINISH);
 
-    // todo - aqui eu preciso pegar o horario de inicio e termino da config e setar pra que o try sode dentro do horario definido
+  // Loop para verificar o tempo até o início
+  while (!isWithinTime(startTime, finishTime)) {
+    const timeUntilStart = getTimeUntilStart(startTime);
+    const secondsUntilStart = msToSeconds(timeUntilStart);
+    console.log(`Fora do horário configurado. Aguardando ${secondsUntilStart} segundos até a inicialização...`);
+    await new Promise(resolve => setTimeout(resolve, 1000));
+  }
+
+  try {
+    socket.emit('SCRAPER_INIT_RES', {
+      title: 'Sucesso',
+      message: 'Bot rodando!',
+    });
+
+    console.log(data);
+
+    // Lógica adicional para o bot rodar durante o período configurado
+    while (Date.now() <= finishTime.getTime()) {
+      const timeRemaining = getTimeRemaining(finishTime);
+      const secondsRemaining = msToSeconds(timeRemaining);
+      console.log(`Bot está rodando. Tempo restante: ${secondsRemaining} segundos.`);
+      await new Promise(resolve => setTimeout(resolve, 1000));
+    }
 
     socket.emit('SCRAPER_INIT_RES', {
       title: 'Sucesso',
-      message: 'A configuração foi processada com sucesso!',
+      message: 'Bot encerrado!',
     });
 
   } catch (error) {
@@ -19,38 +41,3 @@ export default async function ControllerScraperInit(socket: Socket, data: TypeCo
     });
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-// await OpenBrowser();
-// const page = await StartScraper(data); // LOGIN
-// scraper = new Scraper(page, data._id, 1000);
-// await scraper.start(); // CRIA A LISTA DE JOGOS ATUALIZADA EM TEMPO REAL
-
-
-
-// Adicione um ouvinte para parar o scraper quando solicitado
-// socket.on('STOP_SCRAPER', async () => {
-//   if (scraper) {
-//     await scraper.stop(); // Interrompa o scraping
-//     socket.emit('SCRAPER_STOP_RES', {
-//       title: 'Parado',
-//       message: 'O scraper foi parado com sucesso.',
-//     });
-//   } else {
-//     socket.emit('SCRAPER_STOP_RES', {
-//       title: 'Erro',
-//       message: 'Nenhum scraper em execução.',
-//     });
-//   }
-// });
