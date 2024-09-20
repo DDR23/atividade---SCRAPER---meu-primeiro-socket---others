@@ -14,8 +14,11 @@ export default async function ControllerScraperInit(socket: Socket, data: TypeCo
   }
 
   try {
-    // TODO - adicionar socket para enviar estado do bot para o front
-    console.log(`Bot iniciado.`);
+    // ENVIA RESPOSTA DE INÍCIO
+    socket.emit('SCRAPER_INIT_RES_ON', {
+      title: 'Sucesso',
+      message: 'Bot iniciado!'
+    })
 
     console.log(data);
 
@@ -27,8 +30,11 @@ export default async function ControllerScraperInit(socket: Socket, data: TypeCo
       await new Promise(resolve => setTimeout(resolve, 1000));
     }
 
-    // TODO - adicionar socket para enviar estado do bot para o front
-    console.log(`Bot encerrado.`);
+    // ENVIA RESPOSTA DE TÉRMINO
+    socket.emit('SCRAPER_INIT_RES_OFF', {
+      title: 'Sucesso',
+      message: 'Bot encerrado!'
+    })
 
   } catch (error) {
     socket.emit('SCRAPER_INIT_RES', {
