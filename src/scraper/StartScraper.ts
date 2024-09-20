@@ -1,7 +1,7 @@
 import { Page } from "playwright";
 import { TypeConfig } from "../types/TypeConfig";
 import { Login } from "./Login";
-import { GetContext } from "./SetupBrowser";
+import { GetContext } from "./utils/SetupBrowser";
 import { GetRandomNumber } from "./utils/GetRandomNumber";
 
 export async function StartScraper(config: TypeConfig): Promise<Page> {
