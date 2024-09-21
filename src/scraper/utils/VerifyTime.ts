@@ -1,14 +1,15 @@
 export function getStartAndFinishTimes(configTimeStart: string, configTimeFinish: string) {
   const today = new Date();
-  let startTime = new Date(`${today.toISOString().split('T')[0]}T${configTimeStart}:00`);
-  let finishTime = new Date(`${today.toISOString().split('T')[0]}T${configTimeFinish}:00`);
+  const startTime = new Date(today.getFullYear(), today.getMonth(), today.getDate(),
+    parseInt(configTimeStart.split(':')[0]), parseInt(configTimeStart.split(':')[1]));
+  const finishTime = new Date(today.getFullYear(), today.getMonth(), today.getDate(),
+    parseInt(configTimeFinish.split(':')[0]), parseInt(configTimeFinish.split(':')[1]));
 
   // Verifica se o horário de início é no próximo dia
   if (startTime < today) {
     startTime.setDate(startTime.getDate() + 1);
     finishTime.setDate(finishTime.getDate() + 1);
   }
-
   return { startTime, finishTime };
 }
 
