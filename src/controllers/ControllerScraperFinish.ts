@@ -1,17 +1,17 @@
 import { Socket } from "socket.io";
-import { TypeConfig } from "../types/TypeConfig";
 import modalStateManager from "../models/ModelStateManager";
 
-export default function ControllerScraperFinish(socket: Socket, data: TypeConfig): void {
-  const botId = data._id; // Usando o _id do bot para identificar o estado do bot
-
-  // Define o estado isRunning para false para o bot específico
-  modalStateManager.setState(botId, { isRunning: false });
-
-  socket.emit('SCRAPER_FINISH_RES', {
-    title: 'Sucesso',
-    message: `Bot ${botId} parado com sucesso!`,
-  });
-
-  console.log(`O bot ${botId} foi interrompido pelo comando de parada.`);
+export default function ControllerScraperFinish(socket: Socket, id: string): void {
+  try {
+    modalStateManager.setState(id, { isRunning: false });
+    socket.emit('SCRAPER_FINISH_RES', {
+      title: 'Sucesso',
+      message: `Bot ${id} parado com sucesso!`,
+    });
+  } catch (error) {
+    socket.emit('SCRAPER_FINISH_RES', {
+      title: 'Erro',
+      message: (error as Error).message || `A ação não pode ser finalizada para o bot ${id}.`,
+    });
+  }
 }
