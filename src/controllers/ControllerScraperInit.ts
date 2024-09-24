@@ -1,7 +1,7 @@
 import { Socket } from 'socket.io';
 import { TypeConfig } from '../types/TypeConfig';
 import { getStartAndFinishTimes, getTimeUntilStart, getTimeRemaining, msToSeconds, isWithinTime } from '../scraper/utils/VerifyTime';
-import modalStateManager from '../models/ModelStateManager';
+import modelStateManager from '../models/ModelStateManager';
 import { OpenBrowser } from '../scraper/utils/SetupBrowser';
 import { Scraper } from '../models/ModelScraper';
 import { StartScraper } from '../scraper/StartScraper';
@@ -9,12 +9,12 @@ import { StartScraper } from '../scraper/StartScraper';
 export default async function ControllerScraperInit(socket: Socket, data: TypeConfig): Promise<void> {
   const botId = data._id;
   let scraper: Scraper | null = null;
-  modalStateManager.setState(botId, { isRunning: true });
+  modelStateManager.setState(botId, { isRunning: true });
   const { startTime, finishTime } = getStartAndFinishTimes(data.CONFIG_TIME_START, data.CONFIG_TIME_FINISH);
 
   try {
     while (!isWithinTime(startTime, finishTime)) {
-      if (!modalStateManager.getState(botId).isRunning) return;
+      if (!modelStateManager.getState(botId).isRunning) return;
       const secondsUntilStart = msToSeconds(getTimeUntilStart(startTime));
       console.log(`Bot ${botId} fora do horário configurado. Aguardando ${secondsUntilStart} segundos até a inicialização...`);
       await new Promise(resolve => setTimeout(resolve, 1000));
@@ -26,7 +26,7 @@ export default async function ControllerScraperInit(socket: Socket, data: TypeCo
     });
 
     while (Date.now() <= finishTime.getTime()) {
-      const currentState = modalStateManager.getState(botId);
+      const currentState = modelStateManager.getState(botId);
       if (!currentState.isRunning) {
         await scraper?.stop();
         break;

@@ -4,7 +4,7 @@ interface BotState {
   isRunning: boolean;
 }
 
-class ModalStateManager extends EventEmitter {
+class ModelStateManager extends EventEmitter {
   private botsState: Record<string, BotState> = {};
 
   setState(botId: string, newState: Partial<BotState>): void {
@@ -17,5 +17,5 @@ class ModalStateManager extends EventEmitter {
   }
 }
 
-const modalStateManager = new ModalStateManager();
-export default modalStateManager;
+const modelStateManager = new ModelStateManager();
+export default modelStateManager;
