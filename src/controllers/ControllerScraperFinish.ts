@@ -1,9 +1,16 @@
 import { Socket } from "socket.io";
 import modalStateManager from "../models/ModelStateManager";
+import { CloseBrowser } from '../scraper/utils/SetupBrowser';
 
-export default function ControllerScraperFinish(socket: Socket, id: string): void {
+export default async function ControllerScraperFinish(socket: Socket, id: string): Promise<void> {
   try {
     modalStateManager.setState(id, { isRunning: false });
+    await CloseBrowser();
+
+    socket.emit('SCRAPER_FINISH_RES', {
+      title: 'Sucesso',
+      message: `O bot ${id} foi encerrado com sucesso.`,
+    });
   } catch (error) {
     socket.emit('SCRAPER_FINISH_RES', {
       title: 'Erro',

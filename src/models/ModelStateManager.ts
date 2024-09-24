@@ -5,12 +5,7 @@ interface BotState {
 }
 
 class ModalStateManager extends EventEmitter {
-  private botsState: Record<string, BotState>;
-
-  constructor() {
-    super();
-    this.botsState = {};
-  }
+  private botsState: Record<string, BotState> = {};
 
   setState(botId: string, newState: Partial<BotState>): void {
     this.botsState[botId] = { ...this.botsState[botId], ...newState };

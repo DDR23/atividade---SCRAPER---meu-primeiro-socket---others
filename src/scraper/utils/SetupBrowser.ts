@@ -19,9 +19,7 @@ export async function OpenBrowser(): Promise<void> {
       devtools: false,
       args: ["--no-sandbox", "--disable-setuid-sandbox"],
     });
-    context = await browser.newContext({
-      userAgent: getRandomUserAgent()
-    });
+    context = await browser.newContext({ userAgent: getRandomUserAgent() });
   }
 }
 
