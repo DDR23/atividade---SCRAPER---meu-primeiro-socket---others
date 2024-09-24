@@ -5,17 +5,19 @@ import { CreateListCompetitions } from "../scraper/CreateListCompetitions";
 export class Scraper {
   private intervalId: NodeJS.Timeout | null = null;
   private competitionsData: { [configId: string]: CompetitionData } = {};
-  private isRunning = false;
+  private isRunning: boolean = true;
 
-  constructor(private page: Page, private configId: string, private interval: number) {}
+  constructor(private page: Page, private configId: string, private interval: number) { }
 
   async start() {
-    if (this.isRunning) return;
-
-    this.isRunning = true;
+    if (!this.isRunning) return;
     console.log(`Iniciando scraping para o configId: ${this.configId}`);
     await this.collectData();
-    this.intervalId = setInterval(() => this.collectData(), this.interval);
+    this.intervalId = setInterval(() => {
+      if (this.isRunning) {
+        this.collectData();
+      }
+    }, this.interval);
   }
 
   async stop() {
@@ -29,12 +31,17 @@ export class Scraper {
   }
 
   private async collectData() {
+    if (!this.isRunning) return;
     try {
       console.log(`Coletando dados para configId: ${this.configId}`);
       const listCompetitions = await CreateListCompetitions(this.page);
       this.competitionsData[this.configId] = { configId: this.configId, lista: listCompetitions };
     } catch (error) {
-      console.error('Erro ao coletar dados:', error);
+      if ((error as Error).message.includes('Target page, context or browser has been closed')) {
+        console.warn(`Coleta de dados interrompida para configId: ${this.configId} - A página foi fechada.`);
+      } else {
+        console.error('Erro ao coletar dados:', error);
+      }
     }
   }
 

@@ -8,8 +8,7 @@ const userAgents = [
 ];
 
 function getRandomUserAgent(): string {
-  const randomIndex = Math.floor(Math.random() * userAgents.length);
-  return userAgents[randomIndex];
+  return userAgents[Math.floor(Math.random() * userAgents.length)];
 }
 
 export async function OpenBrowser(): Promise<void> {
@@ -19,14 +18,14 @@ export async function OpenBrowser(): Promise<void> {
       devtools: false,
       args: ["--no-sandbox", "--disable-setuid-sandbox"],
     });
-    context = await browser.newContext({ userAgent: getRandomUserAgent() });
+    context = await browser.newContext({
+      userAgent: getRandomUserAgent()
+    });
   }
 }
 
 export function GetContext(): BrowserContext {
-  if (!context) {
-    throw new Error('O contexto não foi inicializado. Certifique-se de chamar OpenBrowser primeiro.');
-  }
+  if (!context) throw new Error('O contexto não foi inicializado. Certifique-se de chamar OpenBrowser primeiro.');
   return context;
 }
 
