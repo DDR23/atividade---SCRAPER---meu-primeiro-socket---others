@@ -112,6 +112,11 @@ export default function Main(socket: Socket, configs: TypeConfig[]) {
         }
       );
 
+      const handleScraperFinish = () => {
+        
+      }
+
+      socket.on('SCRAPER_FINISH', handleScraperFinish)
     } catch (error) {
 
     }
