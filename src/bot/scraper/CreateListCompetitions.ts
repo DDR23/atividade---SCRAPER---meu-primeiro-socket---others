@@ -1,5 +1,5 @@
 import { Page } from "playwright";
-import { TypeCompetition } from "../types/TypeCompetition";
+import { TypeCompetition } from "../../types/TypeCompetition";
 
 export async function CreateListCompetitions(page: Page): Promise<TypeCompetition[]> {
   try {

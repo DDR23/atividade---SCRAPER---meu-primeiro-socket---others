@@ -1,4 +1,5 @@
-import { TypeConfig } from "../types/TypeConfig";
+import { Socket } from "socket.io";
+import { TypeConfig } from "../../types/TypeConfig";
 import { CreateListCompetitions } from "./CreateListCompetitions";
 import { MakeLogin } from "./MakeLogin";
 import { analise } from "./analise/Analise";
@@ -9,7 +10,7 @@ import { ConfigBrowser } from "./utils/ConfigBrowser";
 import { Store } from "./utils/Store";
 import { schedule } from "node-cron";
 
-export default function Main(configs: TypeConfig[]) {
+export default function Main(socket: Socket, configs: TypeConfig[]) {
   configs.forEach(async (config) => {
     const store = new Store();
     try {

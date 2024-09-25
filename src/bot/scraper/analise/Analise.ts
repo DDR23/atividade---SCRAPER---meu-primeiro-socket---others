@@ -1,5 +1,5 @@
-import { TypeConfig } from "../../types/TypeConfig";
-import { TypeStrategyTenis } from "../../types/TypeStrategy";
+import { TypeConfig } from "../../../types/TypeConfig";
+import { TypeStrategyTenis } from "../../../types/TypeStrategy";
 import DiffPoints from "../strategies/DiffPoints";
 import GameTime from "../strategies/GameTime";
 import OddValue from "../strategies/OddValue";
