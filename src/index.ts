@@ -1,16 +1,16 @@
-//CONFIG. PADRÃO DO EXPRESS
 import express from "express";
+import { config } from 'dotenv';
+import http from 'http';
+import { Server } from 'socket.io';
+import HandleScraper from './handlers/HandleScraper';
+
+config();
+
 const app = express();
 app.use(express.json());
 
-//CONFIG. PADRÃO DO DOTENV
-import { config } from 'dotenv';
-config();
-
-//CONFIG. PADRÃO DO SOCKET
-import http from 'http';
-import SocketSetup from "./socket/SocketSetup";
 const httpServer = http.createServer(app);
-SocketSetup(httpServer)
+const io = new Server(httpServer, { cors: { origin: process.env.URL_BACKEND as string } });
+HandleScraper(io);
 
 httpServer.listen(5000, () => console.log('servidor rodando'));
