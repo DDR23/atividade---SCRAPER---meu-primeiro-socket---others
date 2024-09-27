@@ -2,6 +2,8 @@ import { Socket } from 'socket.io';
 import { TypeConfig } from '../types/TypeConfig';
 import { getStartAndFinishTimes, isWithinTime, msToSeconds } from '../utils/VerifyTime';
 import { getShouldStop, setShouldStop } from './ControllerScraperFinish';
+import { OpenBrowser, CloseBrowser } from '../utils/ConfigBrowser';
+import { initBot } from '../bot/BotInit';
 
 const SECOND = 1000;
 
@@ -9,18 +11,20 @@ export default async function ControllerScraperInit(socket: Socket, data: TypeCo
   const { startTime, finishTime } = getStartAndFinishTimes(data.CONFIG_TIME_START, data.CONFIG_TIME_FINISH);
   setShouldStop(executionId, false);
 
-  // Loop para verificar o tempo até o início
-  await waitForStartTime(startTime, finishTime, executionId);
-  if (getShouldStop(executionId)) return;
-
   try {
+    await waitForStartTime(startTime, finishTime, executionId);
+    if (getShouldStop(executionId)) return;
+
+    await OpenBrowser();
     emitInitSuccess(socket, executionId);
     console.log('Configurações:', data, `Execution ID: ${executionId}`);
 
-    // Lógica principal do bot
-    await runBotUntilFinishOrStop(finishTime, executionId, socket);
+    await initBot(socket, data, executionId);
   } catch (error) {
     handleError(error, socket, executionId);
+  } finally {
+    await CloseBrowser();
+    emitFinishMessage(socket, executionId, getShouldStop(executionId));
   }
 }
 
@@ -30,19 +34,6 @@ async function waitForStartTime(startTime: Date, finishTime: Date, executionId: 
     console.log(`Fora do horário configurado. Aguardando ${msToSeconds(timeUntilStart)} segundos até a inicialização do bot ${executionId}`);
     await new Promise(resolve => setTimeout(resolve, SECOND));
   }
-}
-
-async function runBotUntilFinishOrStop(finishTime: Date, executionId: string, socket: Socket) {
-  while (Date.now() < finishTime.getTime() && !getShouldStop(executionId)) {
-    // Aqui você deve adicionar a lógica principal do seu bot
-    // Por exemplo: await runBotLogic(data);
-
-    const timeRemaining = finishTime.getTime() - Date.now();
-    console.log(`Bot está rodando. Tempo restante: ${msToSeconds(timeRemaining)} segundos.`);
-    await new Promise(resolve => setTimeout(resolve, SECOND));
-  }
-
-  emitFinishMessage(socket, executionId, getShouldStop(executionId));
 }
 
 function emitInitSuccess(socket: Socket, executionId: string) {
