@@ -30,5 +30,7 @@ export function msToSeconds(ms: number) {
 
 export function isWithinTime(startTime: Date, finishTime: Date) {
   const now = Date.now();
+  console.log(`Verificando horário atual: ${now}`);
+  console.log(`Horário de início: ${startTime}, Horário de término: ${finishTime}`);
   return now >= startTime.getTime() && now <= finishTime.getTime();
 }

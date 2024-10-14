@@ -1,23 +1,26 @@
-import { Socket } from "socket.io";
-import { TypeConfig } from "../types/TypeConfig";
 import { Browser, Page } from "playwright";
+import { TypeConfig } from "../types/TypeConfig";
 
 export class Store {
   static data: {
-    executionId?: string;
-    socket?: Socket;
-    config?: TypeConfig;
-    browser?: Browser;
-    page?: Page;
-    myBet?: Page;
-    isRunning?: boolean;
-  };
+    [executionId: string]: {
+      config?: TypeConfig;
+      browser?: Browser;
+      page?: Page;
+      myBet?: Page;
+      isRunning?: boolean;
+    };
+  } = {};
 
-  constructor(initialState: any) {
-    Store.data = initialState;
+  constructor(initialState: { executionId: string; data: any }) {
+    Store.data[initialState.executionId] = initialState.data;
   }
 
-  update(newData: any) {
-    Store.data = { ...Store.data, ...newData };
+  update(executionId: string, newData: any) {
+    Store.data[executionId] = { ...Store.data[executionId], ...newData };
+  }
+
+  getData(executionId: string) {
+    return Store.data[executionId];
   }
 }
