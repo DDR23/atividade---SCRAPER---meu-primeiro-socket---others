@@ -3,7 +3,6 @@ export function getStartAndFinishTimes(configTimeStart: string, configTimeFinish
   let startTime = new Date(`${today.toISOString().split('T')[0]}T${configTimeStart}:00`);
   let finishTime = new Date(`${today.toISOString().split('T')[0]}T${configTimeFinish}:00`);
 
-  // Verifica se o horário de início é no próximo dia
   if (startTime < today) {
     startTime.setDate(startTime.getDate() + 1);
     finishTime.setDate(finishTime.getDate() + 1);

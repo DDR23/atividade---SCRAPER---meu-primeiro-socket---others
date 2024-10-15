@@ -24,7 +24,6 @@ export default async function ControllerScraperInit(socket: Socket, data: TypeCo
       console.log(timeStart)
 
       // TODO - verificar por que nao esta entrando no while
-      // Espera até o horário de início
       while (!isWithinTime(startTime, finishTime)) {
         if (!data[config._id]?.isRunning) {
           console.log(`Bot ${config._id} parado antes de começar...`);
@@ -33,14 +32,12 @@ export default async function ControllerScraperInit(socket: Socket, data: TypeCo
         const timeUntilStart = getTimeUntilStart(startTime);
         const secondsUntilStart = msToSeconds(timeUntilStart);
         console.log(`Bot ${config._id} fora do horário configurado. Aguardando ${secondsUntilStart} segundos até a inicialização...`);
-        await new Promise(resolve => setTimeout(resolve, 1000)); // Intervalo ajustado para 5 segundos
+        await new Promise(resolve => setTimeout(resolve, 1000));
       }
 
-      // Inicializa o bot
       data[config._id].isRunning = true;
       console.log(`Bot ${config._id} iniciado...`);
 
-      // Controle de execução do bot até o horário de término
       while (Date.now() <= finishTime.getTime()) {
         if (!data[config._id]?.isRunning) {
           console.log(`Bot ${config._id} parado automaticamente.`);
@@ -49,10 +46,9 @@ export default async function ControllerScraperInit(socket: Socket, data: TypeCo
         const timeRemaining = getTimeRemaining(finishTime);
         const secondsRemaining = msToSeconds(timeRemaining);
         console.log(`Bot ${config._id} está rodando. Tempo restante: ${secondsRemaining} segundos.`);
-        await new Promise(resolve => setTimeout(resolve, 1000)); // Intervalo ajustado para 1 segundos
+        await new Promise(resolve => setTimeout(resolve, 1000));
       }
 
-      // Encerra o bot
       data[config._id].isRunning = false;
       console.log(`Bot ${config._id} encerrado...`);
       
