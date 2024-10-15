@@ -12,15 +12,23 @@ export class Store {
     };
   } = {};
 
-  constructor(initialState: { executionId: string; data: any }) {
-    Store.data[initialState.executionId] = initialState.data;
+  // constructor(initialState: { executionId: string; data: any }) {
+  //   Store.data[initialState.executionId] = initialState.data;
+  // }
+
+  constructor(initialState: { executionId: string; data: any } | null = null) {
+    if (initialState) {
+      Store.data[initialState.executionId] = initialState.data;
+    } else {
+      Store.data = {};
+    }
   }
 
   update(executionId: string, newData: any) {
     Store.data[executionId] = { ...Store.data[executionId], ...newData };
   }
 
-  getData(executionId: string) {
-    return Store.data[executionId];
-  }
+  // getData(executionId: string) {
+  //   return Store.data[executionId];
+  // }
 }
