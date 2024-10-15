@@ -6,6 +6,7 @@ import { configBrowser } from "../utils/ConfigBrowser";
 import { MakeLogin } from "../utils/MakeLogin";
 import BotInit from "../bot/BotInit";
 
+// TODO - o bot nao fecha durante a execução do MakeLogin
 export default async function ControllerScraperInit(socket: Socket, data: TypeConfig | TypeConfig[]) {
   const configs = Array.isArray(data) ? data : [data];
 
@@ -37,18 +38,22 @@ export default async function ControllerScraperInit(socket: Socket, data: TypeCo
         await new Promise(resolve => setTimeout(resolve, 1000));
       }
 
-      const browser = await configBrowser();
-      store.update(config._id, { browser: browser });
-      const { page, myBet } = await MakeLogin(config._id);
-      store.update(config._id, { page: page, myBet: myBet });
-
-      // await BotInit();
-      console.log(`Bot ${config._id}:`, Store.data[config._id]);
+      let isRunning = false;
 
       while (Date.now() <= finishTime.getTime()) {
         if (!data[config._id]?.isRunning) {
           break;
         }
+
+        if (!isRunning) {
+          const browser = await configBrowser();
+          store.update(config._id, { browser: browser });
+          const { page, myBet } = await MakeLogin(config._id);
+          store.update(config._id, { page: page, myBet: myBet });
+          await BotInit(socket, config._id);
+          isRunning = true;
+        }
+
         const timeRemaining = getTimeRemaining(finishTime);
         const secondsRemaining = msToSeconds(timeRemaining);
         console.log(`Bot ${config._id} está rodando. Tempo restante: ${secondsRemaining} segundos.`);

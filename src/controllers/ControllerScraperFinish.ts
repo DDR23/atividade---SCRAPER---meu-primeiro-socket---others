@@ -5,8 +5,8 @@ export default async function ControllerScraperFinish(socket: Socket, executionI
   const data = Store.data;
   try {
     if (data[executionId]?.isRunning) {
-      data[executionId].browser?.close();
       data[executionId].isRunning = false;
+      data[executionId].browser?.close();
       console.log(`Bot ${executionId} parado manualmente`);
     } else {
       console.log(`O bot ${executionId} já está parado.`);

@@ -44,6 +44,10 @@ export async function MakeLogin(executionId: string): Promise<Props> {
     await page.waitForTimeout(GetRandomNumber(4000, 8000));
     await Login(page, CONFIG_USER, CONFIG_PASSWORD);
 
+    await page.waitForTimeout(GetRandomNumber(1000, 2000));
+    const messageOverlay = page.locator('.pm-MessageOverlayCloseButton');
+    if (await messageOverlay.isVisible()) await messageOverlay.click();
+
     await page.waitForTimeout(GetRandomNumber(4000, 8000));
     await page.locator('.hm-MainHeaderTabRow_InPlayLabel').click();
 
