@@ -1,11 +1,11 @@
-interface TimeInfo {
+export interface TimeInfo {
   name: string;
   sets: number;
   points: number;
   odd: number;
 }
 
-interface Game {
+export interface Game {
   time_one: TimeInfo;
   time_two: TimeInfo;
 }
